@@ -9,18 +9,29 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <main>
-            <header class="">
-                
-            </header>
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+            </div>
+            <a href="<?php echo BASE_URL; ?>/" class="logo">SISTEMA <span>EXAMES</span></a>
+            <div class="top-nav">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">Resultados<b class=" fa fa-angle-down"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo BASE_URL; ?>/exame">Geral</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </header>
 
-            <section class="col-md-12 col-xs-12 col-sm-12">
-                <?php $this->loadViewInTemplate($viewName, $viewData); ?>        
-            </section>
-
-            <footer>
-            </footer>
+        <main class="">
+            <?php $this->loadViewInTemplate($viewName, $viewData); ?>        
         </main>
+
+        <footer>
+        </footer>
 
         <script src="<?php echo BASE_URL; ?>/assets/js/jquery-3.1.0.min.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/jquery.maskMoney.js"></script>
