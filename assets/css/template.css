@@ -101,6 +101,10 @@
     .table_exame_geral > tbody > tr > td {
         text-align: center;
     }
+    
+    .div_nao_existe {
+        margin-top: 8%;
+    }
 
 }	
 @media (min-width: 1440px) {

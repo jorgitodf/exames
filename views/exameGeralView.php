@@ -1,10 +1,11 @@
 
-<section class="container- col-sm-12 col-md-12">
+<section class="container col-sm-12 col-md-12">
     <div class="panel_exame_geral">
         <header class="panel-heading">
             <div class="panel panel-success" >
                 <div class="panel-heading" id="panel_head">Resultados de Exames</div>
                 <div class="panel-body">
+                    <?php isset($exames) ? $exames : ""; ?>
                     <table class="table table-bordered table-responsive table-hover table-condensed table_exame_geral">
                         <thead>
                             <tr>
@@ -16,20 +17,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($exames as $linha): ?>
                             <tr>
-                                <td>01/01/2014</td>
-                                <td>Análises Clínicas</td>
-                                <td>Nidale Hamad Karaja</td>
-                                <td>Laboratório EXAME - Sobradinho DF</td>
-                                <td><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></td>
+                                <td><?php echo $linha['dt_exame']; ?></td>
+                                <td><?php echo ucwords(strtolower(mb_convert_case($linha['tipo_exame'], MB_CASE_TITLE))); ?></td>
+                                <td><?php echo ucwords(strtolower(mb_convert_case($linha['medico'], MB_CASE_TITLE))); ?></td>
+                                <td><?php echo ucwords(strtolower(mb_convert_case($linha['lab'], MB_CASE_TITLE))); ?></td>
+                                <td><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/ver/<?php echo $linha['num_exame']; ?>"></a></td>
                             </tr>
-                            <tr>
-                                <td>17/06/2015</td>
-                                <td>Análises Clínicas</td>
-                                <td>Tatiana Evaristo Cardoso de Souza</td>
-                                <td>Laboratório SABIN - Sobradinho DF</td>
-                                <td><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></td>
-                            </tr>
+                            <?php endforeach; ?>    
                         </tbody>
                     </table>
                 </div>
