@@ -55,36 +55,21 @@
         right: 0;
         left: auto; 
     }
-    .top-nav {
-        border-bottom-color: #A4AABA;
-        border-top-color: #A4AABA;
+    .top-nav > ul > li > a {
+        color: gray;
     }
-    .top-nav > li > a:hover {
-        border-bottom-color: #000;
-        border-top-color: #000;
-    }
-    .top-nav > li > a {
-        border: 1px solid #eeeeee;
-        border-radius: 4px;
-        -webkit-border-radius: 4px;
-        padding: 6px;
-        background: none;
-        margin-right: 0;
+    .top-nav > ul > li > a:hover, .top-nav > ul > li > a:focus {
+        background-color: #FF6347;
+        color: white;
     }
     .top-nav > li {
         margin-left: 10px;
     }
-    .top-nav > li > a:hover, .top-nav ul.top-menu > li > a:focus {
-        border:1px solid #F1F2F7;
-        background: #F1F2F7;
-    }
     a.top-nav {
         font-size: 3px;
     }
-    
     .panel_exame_geral {
         margin-top: 8%;
-        height: 120px;
     }
     #panel_head {
         background-color: #B0C4DE;
@@ -105,8 +90,45 @@
     .div_nao_existe {
         margin-top: 8%;
     }
+    
+    #table_exame_detalhado {
+        width: 70%;
+        margin-left: 14%;
+        margin-top: 2%;
+    }
+    #table_exame_detalhado > tbody > tr > td {
+        text-align: center;
+        padding: 3px;
+    }
+    #table_exame_detalhado > thead > tr > th {
+        text-align: center;
+        padding: 3px;
+        background-color: #E8E8E8;
+        color: black;
+        border: 0;
+    }
+    #table_exame_detalhado > thead > tr > td {
+        text-align: center;
+        padding: 3px;
+        background-color: #E8E8E8;
+        color: blue;
+        border: 0;
+    }
+    
+    .div_sem_exames {
+        margin-top: 2%;
+        margin-left: 35%;
+        text-align: center;
+        width: 400px;
+    }
+    .div_btn_sair {
+        float: right;
+        margin-right: 16%;
+    }
+}
 
-}	
+
+
 @media (min-width: 1440px) {
 
     html, body {

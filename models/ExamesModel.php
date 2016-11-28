@@ -14,17 +14,43 @@ class ExamesModel extends Model {
     public function verDetalheExame($idExame) {
         $dados = array();
         if (isset($idExame) && !empty($idExame)) {
-            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi WHERE epi.id_exame = ? AND id_grupo_exame = 1 "
+            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi "
+                  . " WHERE epi.id_exame = ? AND epi.id_grupo_exame = 1 "
                   . " ORDER BY epi.id_grupo_exame, epi.id_resultado_exame ASC");
             $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
             $stmt->execute();
             $dados['grupo1'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
-            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi WHERE epi.id_exame = ? AND id_grupo_exame = 2 "
+            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi "
+                  . " WHERE epi.id_exame = ? AND epi.id_grupo_exame = 2 "
                   . " ORDER BY epi.id_grupo_exame, epi.id_resultado_exame ASC");
             $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
             $stmt->execute();
             $dados['grupo2'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi WHERE epi.id_exame = ? AND id_grupo_exame = 3 "
+                  . " ORDER BY epi.id_grupo_exame, epi.id_resultado_exame ASC");
+            $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmt->execute();
+            $dados['grupo3'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi WHERE epi.id_exame = ? AND id_grupo_exame = 4 "
+                  . " ORDER BY epi.id_grupo_exame, epi.id_resultado_exame ASC");
+            $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmt->execute();
+            $dados['grupo4'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi WHERE epi.id_exame = ? AND id_grupo_exame = 5 "
+                  . " ORDER BY epi.id_grupo_exame, epi.id_resultado_exame ASC");
+            $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmt->execute();
+            $dados['grupo5'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $stmt = $this->db->prepare("SELECT * FROM vw_ver_exame_por_id as epi WHERE epi.id_exame = ? AND id_grupo_exame = 6 "
+                  . " ORDER BY epi.id_grupo_exame, epi.id_resultado_exame ASC");
+            $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmt->execute();
+            $dados['grupo6'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             return $dados;
         }
