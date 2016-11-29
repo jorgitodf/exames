@@ -17,7 +17,7 @@
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
                     <thead>
                         <tr>
-                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo1'][0]['id_exame']; ?></td>
+                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo1'][0]['num_exame']; ?></td>
                             <td colspan="2"><b>Data:</b> <?php echo $exameDetalhe['grupo1'][0]['dt_exame']; ?></td>
                         </tr>
                         <tr>

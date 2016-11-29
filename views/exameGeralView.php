@@ -23,7 +23,7 @@
                                 <td><?php echo ucwords(strtolower(mb_convert_case($linha['tipo_exame'], MB_CASE_TITLE))); ?></td>
                                 <td><?php echo ucwords(strtolower(mb_convert_case($linha['medico'], MB_CASE_TITLE))); ?></td>
                                 <td><?php echo ucwords(strtolower(mb_convert_case($linha['lab'], MB_CASE_TITLE))); ?></td>
-                                <td><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/ver/<?php echo $linha['num_exame']; ?>"></a></td>
+                                <td><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/ver/<?php echo $linha['id_exame']; ?>"></a></td>
                             </tr>
                             <?php endforeach; ?>    
                         </tbody>

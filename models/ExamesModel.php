@@ -56,7 +56,22 @@ class ExamesModel extends Model {
         }
     }
 
-    
+     public function contaExames() {
+        $dados = array();
+        $data = array();
+        $stmt = $this->db->prepare("SELECT distinct(SELECT EXTRACT(year FROM data_exame)) AS data FROM tb_exame ORDER BY data ASC");
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $value) {
+            $stmt = $this->db->prepare("SELECT count(id_exame) as qtd_exam, (SELECT EXTRACT(year FROM data_exame)) AS data "
+                    . "FROM tb_exame WHERE data_exame BETWEEN '".$value['data']."-01-01' AND '".$value['data']."-12-31'");
+            $stmt->execute();
+            array_push($dados, $stmt->fetch(PDO::FETCH_ASSOC)); 
+            
+        }   
+        return $dados;
+    }   
     
     
     
@@ -84,10 +99,7 @@ class ExamesModel extends Model {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function getTipoConta() {
-        $stmt = $this->db->query("SELECT * FROM tb_tipo_conta ORDER BY tipo_conta");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+
 
     public function cadastrarConta($nomeBanco, $codAgencia, $digAgencia, $tipoConta, $numConta, $digConta, $codOperacao, $idUser) {
         if (!empty($nomeBanco) && !empty($codAgencia) && !empty($tipoConta) && !empty($numConta) && !empty($digConta) && !empty($idUser)) {
