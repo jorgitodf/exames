@@ -68,8 +68,13 @@
     a.top-nav {
         font-size: 3px;
     }
+    .panel_exame_geral_detalhe {
+        margin-top: 8%;
+        margin-left: 8%;
+    }
     .panel_exame_geral {
         margin-top: 8%;
+        margin-left: auto;
     }
     #panel_head {
         background-color: #B0C4DE;
@@ -92,8 +97,8 @@
     }
     
     #table_exame_detalhado {
-        width: 70%;
-        margin-left: 14%;
+        width: 100%;
+        margin-left: auto;
         margin-top: 2%;
     }
     #table_exame_detalhado > tbody > tr > td {
@@ -117,16 +122,63 @@
     
     .div_sem_exames {
         margin-top: 2%;
-        margin-left: 35%;
+        margin-left: 30%;
         text-align: center;
         width: 400px;
     }
     .div_btn_sair {
         float: right;
-        margin-right: 16%;
+        margin-right: auto;
+    }
+    .div_cont_exames {
+        margin-top: 9%;
+        width: 24%;
+    }
+    #badge_geral {
+        background-color: blue;
+    }
+    #list_group_home > li {
+        background-color: #EEEEE0;
+        color: #8B8B83;
+    }
+    .div_qtd_exame_geral {
+        background-color: #9FB6CD;
+        padding: 6px;
+        color: white;
+    }
+    .div_qtd_exame_geral > h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .form_cadastro_exame {
+        margin-top: 8%;
+    }
+    .form_exame_cadastro input[type="text"], input[type="date"], #medico, #lab, #tipo_exame {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        -webkit-border-radius: 7px;
+        border: 1px solid #adadad;
+        box-shadow: #28a4c9;
+        font-size: 12px;
+        width: 100%;
+    }
+    #panel_form_cadastro_exame {
+        width: 35%;
+        margin-left: 33%;
+        border-radius: 5px;
+        -webkit-border-radius: 7px;
+        border: 1px solid #adadad;
+        box-shadow: #28a4c9;
+    }
+    #panel_form_cadastro_exame_heading {
+        background-color: #DCDCDC;
+        border: 0 solid #adadad;
+    }
+    #panel_form_cadastro_exame_heading > h3 {
+        color: #8B8B83;
+        font-weight: bold;
     }
 }
-
 
 @media (min-width: 1440px) {
 

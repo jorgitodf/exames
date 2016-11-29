@@ -17,9 +17,21 @@ class exameController extends Controller {
     
     public function ver($idExame = null) {
         $dados = array();
-        if ($idExame != null && is_numeric($idExame)) {
+        if ($idExame != null && is_numeric($idExame) && $idExame > 0) {
             $dados['exameDetalhe'] = $this->examesModel->verDetalheExame($idExame);
             $this->loadTemplate('exameDetalheView', $dados);
+        } else {
+            header("Location: ".BASE_URL."/naoexiste");
+            die();
+        }
+    }
+    
+    public function listar_ano($ano = null) {
+        $dados = array();
+        $cont = strlen($ano);
+        if ($ano != null && is_numeric($ano) && $cont == 4) {
+            $dados['examePorAno'] = $this->examesModel->listarExamePorAno($ano);
+            $this->loadTemplate('examePorAnoView', $dados);
         } else {
             header("Location: ".BASE_URL."/naoexiste");
             die();

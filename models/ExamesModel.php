@@ -10,6 +10,18 @@ class ExamesModel extends Model {
         $stmt = $this->db->query("SELECT * FROM vw_lista_geral_exames");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function listarExamePorAno($ano) {
+        if (isset($ano) && !empty($ano)) {
+            $stmt = $this->db->query("SELECT lge.id_exame as id_exame, lge.num_exame as num_exame, lge.dt_exame as dt_exame, 
+                lge.medico as medico, lge.lab as lab, lge.tipo_exame as tipo_exame FROM vw_lista_geral_exames lge JOIN tb_exame e 
+                ON (e.id_exame = lge.id_exame) WHERE e.data_exame BETWEEN '".$ano."-01-01' AND '".$ano."-12-31' "
+                  . "ORDER BY e.data_exame ASC");
+            $stmt->bindValue(1, $ano, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }    
+    }
 
     public function verDetalheExame($idExame) {
         $dados = array();

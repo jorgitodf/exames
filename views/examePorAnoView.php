@@ -5,7 +5,7 @@
             <div class="panel panel-success" >
                 <div class="panel-heading" id="panel_head">Resultados de Exames</div>
                 <div class="panel-body">
-                    <?php isset($exames) ? $exames : ""; ?>
+                    <?php isset($examePorAno) ? $examePorAno : ""; ?>
                     <table class="table table-bordered table-responsive table-hover table-condensed table_exame_geral">
                         <thead>
                             <tr>
@@ -17,7 +17,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($exames as $linha): ?>
+                            <?php foreach ($examePorAno as $linha): ?>
                             <tr>
                                 <td><?php echo $linha['dt_exame']; ?></td>
                                 <td><?php echo ucwords(strtolower(mb_convert_case($linha['tipo_exame'], MB_CASE_TITLE))); ?></td>

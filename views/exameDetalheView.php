@@ -1,6 +1,6 @@
 
 <section class="container col-sm-12 col-md-12">
-    <div class="panel_exame_geral col-sm-12 col-md-12">
+    <div class="panel_exame_geral_detalhe col-sm-10 col-md-10">
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="#lipidico" data-toggle="tab">Perfil Lipídico</a></li>
             <li role="presentation"><a href="#hemograma" data-toggle="tab">Hemograma com Contagem de Plaquetas</a></li>
@@ -10,7 +10,7 @@
             <li role="presentation"><a href="#urina" data-toggle="tab">Urina Tipo 1</a></li>
         </ul>
         
-        <div class="tab-content col-sm-12 col-md-12">
+        <div class="tab-content">
             <div id="lipidico" class="tab-pane active in fade">
                 <?php isset($exameDetalhe['grupo1']) ? $exameDetalhe['grupo1'] : "<h3>Não foi realizado exames</h3>"; ?>
                 <?php if (!empty($exameDetalhe['grupo1'])): ?>
@@ -37,7 +37,7 @@
                     </tbody>
                 </table>
                 <?php else: ?>
-                    <div class="div_sem_exames alert alert-warning" role="alert">
+                    <div class="div_sem_exames alert alert-danger" role="alert">
                         <p>Nenhum exame realizado</p>
                     </div>
                 <?php endif;?>
@@ -48,7 +48,7 @@
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
                     <thead>
                         <tr>
-                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo2'][0]['id_exame']; ?></td>
+                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo2'][0]['num_exame']; ?></td>
                             <td colspan="2"><b>Data:</b> <?php echo $exameDetalhe['grupo2'][0]['dt_exame']; ?></td>
                         </tr>
                         <tr>
@@ -68,7 +68,7 @@
                     </tbody>
                 </table> 
                 <?php else: ?>
-                    <div class="div_sem_exames alert alert-warning" role="alert">
+                    <div class="div_sem_exames alert alert-danger" role="alert">
                         <p>Nenhum exame realizado</p>
                     </div>
                 <?php endif;?>
@@ -79,7 +79,7 @@
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
                     <thead>
                         <tr>
-                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo3'][0]['id_exame']; ?></td>
+                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo3'][0]['num_exame']; ?></td>
                             <td colspan="2"><b>Data:</b> <?php echo $exameDetalhe['grupo3'][0]['dt_exame']; ?></td>
                         </tr>
                         <tr>
@@ -99,7 +99,7 @@
                     </tbody>
                 </table>
                 <?php else: ?>
-                    <div class="div_sem_exames alert alert-warning" role="alert">
+                    <div class="div_sem_exames alert alert-danger" role="alert">
                         <p>Nenhum exame realizado</p>
                     </div>
                 <?php endif;?>
@@ -110,7 +110,7 @@
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
                     <thead>
                         <tr>
-                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo4'][0]['id_exame']; ?></td>
+                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo4'][0]['num_exame']; ?></td>
                             <td colspan="2"><b>Data:</b> <?php echo $exameDetalhe['grupo4'][0]['dt_exame']; ?></td>
                         </tr>
                         <tr>
@@ -130,7 +130,7 @@
                     </tbody>
                 </table>
                 <?php else: ?>
-                    <div class="div_sem_exames alert alert-warning" role="alert">
+                    <div class="div_sem_exames alert alert-danger" role="alert">
                         <p>Nenhum exame realizado</p>
                     </div>
                 <?php endif;?>
@@ -141,7 +141,7 @@
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
                     <thead>
                         <tr>
-                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo5'][0]['id_exame']; ?></td>
+                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo5'][0]['num_exame']; ?></td>
                             <td colspan="2"><b>Data:</b> <?php echo $exameDetalhe['grupo5'][0]['dt_exame']; ?></td>
                         </tr>
                         <tr>
@@ -161,7 +161,7 @@
                     </tbody>
                 </table>
                 <?php else: ?>
-                    <div class="div_sem_exames alert alert-warning" role="alert">
+                    <div class="div_sem_exames alert alert-danger" role="alert">
                         <p>Nenhum exame realizado</p>
                     </div>
                 <?php endif;?>
@@ -172,7 +172,7 @@
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
                     <thead>
                         <tr>
-                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo6'][0]['id_exame']; ?></td>
+                            <td><b>Número do Exame:</b> <?php echo $exameDetalhe['grupo6'][0]['num_exame']; ?></td>
                             <td colspan="2"><b>Data:</b> <?php echo $exameDetalhe['grupo6'][0]['dt_exame']; ?></td>
                         </tr>
                         <tr>
@@ -192,13 +192,13 @@
                     </tbody>
                 </table>
                 <?php else: ?>
-                    <div class="div_sem_exames alert alert-warning" role="alert">
+                    <div class="div_sem_exames alert alert-danger" role="alert">
                         <p>Nenhum exame realizado</p>
                     </div>
                 <?php endif;?>
             </div>            
         </div>
-        <div class="form-group col-sm-12 col-md-12">
+        <div class="form-group">
             <div class="div_btn_sair">
                 <a class="btn btn-primary" href="<?php echo BASE_URL; ?>/exame" title="Voltar à página de Exames Geral">Sair</a>
             </div>

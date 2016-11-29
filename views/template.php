@@ -22,6 +22,12 @@
                             <li><a href="<?php echo BASE_URL; ?>/exame">Geral</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">Cadastros<b class=" fa fa-angle-down"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo BASE_URL; ?>/cadastro">Exame</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </header>
