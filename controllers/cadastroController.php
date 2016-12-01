@@ -18,7 +18,11 @@ class cadastroController extends Controller {
         $dados['medicos'] = $this->medicosModel->getMedicos();
         $dados['labs'] = $this->laboratoriosModel->getLaboratorios();
         $dados['tipoExame'] = $this->laboratoriosModel->getTipoExame();
-        
+        $this->loadTemplate('cadastroExameView', $dados);
+
+
+
+        /*
         $status = "";
         if (isset($_POST['num_exame']) && empty($_POST['num_exame'])) {
             echo "Campo num_exame vazio";
@@ -49,7 +53,24 @@ class cadastroController extends Controller {
             $tipoExame = trim(addslashes($_POST['tipo_exame']));
         }    
         
-        $this->loadTemplate('cadastroExameView', $dados);
+        $this->loadTemplate('cadastroExameView', $dados); */
+    }
+    
+    public function cadastrar_cliente() {
+        if (isset($_POST['num_exame']) && empty($_POST['num_exame'])) {
+            $erro1 = "Campo num_exame vazio";
+            $status = false;
+        }    
+        if (isset($_POST['data_exame']) && empty($_POST['data_exame'])) {
+            $erro2 = "Campo data_exame vazio";
+            $status = false;
+        }    
+        if ($status != true) {
+            echo json_encode(array("erro1" => $erro1, "erro2" => $erro2));
+        } else {
+            echo "OK";
+        }
+        
     }
     
 }

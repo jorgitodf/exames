@@ -35,9 +35,21 @@ $(function () {
 
     });
     
-    
-    
-    
+    $("#form_exa_cad").on('submit', function(e) {
+        var num_exame = $('#num_exame').val();
+        var data_exame = $('#data_exame').val();
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr("action"),
+            type: 'POST',
+            data: {num_exame: num_exame, data_exame: data_exame},
+            dataType: 'json',
+            success: function(data) {
+                alert(data["erro1"]);
+                alert(data["erro2"]);
+            }
+        });
+    });
     
     
     

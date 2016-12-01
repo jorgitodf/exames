@@ -31,8 +31,7 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a id="ver_valor_ref" class="glyphicon glyphicon-zoom-in" aria-hidden="true" href=""></a></td>
-                            <td style="display:none"><input type="text" id="id_resultado_exame" data-type="getReferencia" value="<?php echo $linha['id_nome_exame']; ?>"></td>
+                            <td width="120"><a id="ver_valor_ref" class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/referencia/ver/<?php echo $linha['id_resultado_exame']; ?>"></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -43,6 +42,7 @@
                     </div>
                 <?php endif;?>
             </div>
+            
             <div id="hemograma" class="tab-pane">
                 <?php isset($exameDetalhe['grupo2']) ? $exameDetalhe['grupo2'] : ""; ?>
                 <?php if (!empty($exameDetalhe['grupo2'])): ?>
@@ -63,8 +63,7 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a id="" class="glyphicon glyphicon-zoom-in" aria-hidden="true" href=""></a></td>
-                            <td style="display:none"><input type="text" id="" data-type="getReferencia" value="<?php echo $linha['id_nome_exame']; ?>"></td>
+                            <td width="120"><a id="" class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/referencia/ver/<?php echo $linha['id_resultado_exame']; ?>"></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -95,7 +94,7 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/referencia/<?php echo $linha['id_nome_exame']; ?>"></a></td>
+                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/referencia/ver/<?php echo $linha['id_resultado_exame']; ?>"></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -126,7 +125,7 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/referencia/<?php echo $linha['id_nome_exame']; ?>"></a></td>
+                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/referencia/ver/<?php echo $linha['id_resultado_exame']; ?>"></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -157,7 +156,7 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/referencia/<?php echo $linha['id_nome_exame']; ?>"></a></td>
+                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/referencia/ver/<?php echo $linha['id_resultado_exame']; ?>"></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -188,7 +187,7 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/referencia/<?php echo $linha['id_nome_exame']; ?>"></a></td>
+                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/referencia/ver/<?php echo $linha['id_resultado_exame']; ?>"></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

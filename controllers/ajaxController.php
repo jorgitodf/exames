@@ -19,7 +19,18 @@ class ajaxController extends controller {
         echo json_encode($data);
     }
 
-    
+    public function cadastrar_cliente() {
+        if (isset($_POST['num_exame']) && empty($_POST['num_exame'])) {
+            $erro1 = "Campo num_exame vazio";
+        }    
+        if (isset($_POST['data_exame']) && empty($_POST['data_exame'])) {
+            $erro2 = "Campo data_exame vazio";
+        }    
+        
+        echo json_encode(array("erro1" => $erro1, "erro2" => $erro2));
+    }
+
+
     
     
     
