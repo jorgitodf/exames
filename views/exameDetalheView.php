@@ -10,7 +10,7 @@
             <li role="presentation"><a href="#urina" data-toggle="tab">Urina Tipo 1</a></li>
         </ul>
         
-        <div class="tab-content">
+        <div class="tab-content" id="div_table">
             <div id="lipidico" class="tab-pane active in fade">
                 <?php isset($exameDetalhe['grupo1']) ? $exameDetalhe['grupo1'] : "<h3>Não foi realizado exames</h3>"; ?>
                 <?php if (!empty($exameDetalhe['grupo1'])): ?>
@@ -31,7 +31,8 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/referencia/<?php echo $linha['id_nome_exame']; ?>"></a></td>
+                            <td width="120"><a id="ver_valor_ref" class="glyphicon glyphicon-zoom-in" aria-hidden="true" href=""></a></td>
+                            <td style="display:none"><input type="text" id="id_resultado_exame" data-type="getReferencia" value="<?php echo $linha['id_nome_exame']; ?>"></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -62,7 +63,8 @@
                         <tr>
                             <td><?php echo ucwords(strtolower(mb_convert_case($linha['exame'], MB_CASE_TITLE))); ?></td>
                             <td width="200"><?php echo $linha['resultado']; ?></td>
-                            <td width="120"><a class="glyphicon glyphicon-zoom-in" aria-hidden="true" href="<?php echo BASE_URL; ?>/exame/referencia/<?php echo $linha['id_nome_exame']; ?>"></a></td>
+                            <td width="120"><a id="" class="glyphicon glyphicon-zoom-in" aria-hidden="true" href=""></a></td>
+                            <td style="display:none"><input type="text" id="" data-type="getReferencia" value="<?php echo $linha['id_nome_exame']; ?>"></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
