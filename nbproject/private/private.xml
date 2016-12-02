@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/exames/controllers/ajaxController.php</file>
+            <file>file:/C:/xampp/htdocs/exames/assets/css/template.css</file>
+            <file>file:/C:/xampp/htdocs/exames/views/cadastroExameView.php</file>
             <file>file:/C:/xampp/htdocs/exames/assets/js/script.js</file>
             <file>file:/C:/xampp/htdocs/exames/views/template.php</file>
             <file>file:/C:/xampp/htdocs/exames/controllers/cadastroController.php</file>
+            <file>file:/C:/xampp/htdocs/exames/core/helpers/ValidacoesHelper.php</file>
         </group>
     </open-files>
 </project-private>

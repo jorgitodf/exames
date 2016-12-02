@@ -17,6 +17,7 @@ class cadastroController extends Controller {
         $dados = array();
         $dados['labs'] = $this->laboratoriosModel->getLaboratorios();
         $dados['tipoExame'] = $this->laboratoriosModel->getTipoExame();
+        $dados['medicos'] = $this->medicosModel->getMedicos();
         $this->loadTemplate('cadastroExameView', $dados);
 
 
@@ -57,34 +58,98 @@ class cadastroController extends Controller {
     
     public function cadastrar_exame() {
         
-        $num_exame = $_POST['num_exame'];
-        $data_exame = $_POST['data_exame'];
-        $medico = $_POST['medico'];
-        $lab = $_POST['lab'];
-        $tipo_exame = $_POST['tipo_exame'];
-       
-        $erros = array('erro1'=>'','erro2'=>'','erro3'=>'','erro4'=>'','erro5'=>'','sucesso'=>'');
-        
-        if (isset($num_exame) && empty($num_exame)) {
-            $erros['erro1'] = "Número do Exame obrigatório!";
-        } 
-        if (isset($data_exame) && empty($data_exame)) {
-            $erros['erro2'] = "Data do Exame obrigatória!";
-        } 
-        if (isset($medico) && empty($medico)) {
-            $erros['erro3'] = "Selecione um(a) Médico(a)!";
-        } 
-        if (isset($lab) && empty($lab)) {
-            $erros['erro4'] = "Selecione um Laboratório!";
-        } 
-        if (isset($tipo_exame) && empty($tipo_exame)) {
-            $erros['erro5'] = "Selecione um Tipo de Exame!";
-        } 
-        if (!empty($num_exame) && !empty($data_exame)) {
-            $erros['sucesso'] = "Dados Cadastrados";
-        }
+        if (isset($_POST)) {
             
-        echo json_encode($erros);
+            $status = TRUE;
+            
+            $num_exame = addslashes($_POST['num_exame']);
+            $data_exame = addslashes($_POST['data_exame']);
+            $medico = intval(addslashes($_POST['medico']));
+            $lab = intval(addslashes($_POST['lab']));
+            $tipo_exame = intval(addslashes($_POST['tipo_exame']));
+            
+            ValidacoesHelper::validarNumeroExame($numeroExame);
+            
+            if (empty($num_exame)) {
+                $erroNumExame = '
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#numExameError").html("Número do Exame é obrigatório!");
+                        $("#numExameError").css("display","block");
+                    });
+                </script>';
+                $status = false;
+                echo $erroNumExame;
+            } else if (!is_numeric($num_exame)) {
+                $erroNumExame = '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#numExameError").html("Número do Exame só aceita números");
+                            $("#numExameError").css("display","block");
+                        });
+                    </script>';
+                echo $erroNumExame;			
+            }
+            
+            if (empty($data_exame)) {
+                $erroDataExame = '
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#dataExameError").html("Data do Exame é obrigatória!");
+                        $("#dataExameError").css("display","block");
+                    });
+                </script>';
+                $status = false;
+                echo $erroDataExame;
+            } 
+            if (empty($medico)) {
+                $erroMed = '
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#medicoError").html("Informe um Médico!");
+                        $("#medicoError").css("display","block");
+                    });
+                </script>';
+                $status = false;
+                echo $erroMed;
+            }
+            if (empty($lab)) {
+                $erroLab = '
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#laboratotioError").html("Informe um Laboratório!");
+                        $("#laboratotioError").css("display","block");
+                    });
+                </script>';
+                $status = false;
+                echo $erroLab;
+            } 
+            if (empty($tipo_exame)) {
+                $erroTipoExame = '
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#tipoExameError").html("Informe um Tipo de Exame!");
+                        $("#tipoExameError").css("display","block");
+                    });
+                </script>';
+                $status = false;
+                echo $erroTipoExame;
+            } 
+            
+            if ($status == TRUE) {
+                echo '
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#sucessoError").html("Exame Cadastrado com Sucesso !");
+                        $("#sucessoError").css("display","block");
+                    });
+                </script> ';  
+                
+            }
+            
+        } else {
+            $this->index();
+        }
        
     }
     

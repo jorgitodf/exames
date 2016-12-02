@@ -46,26 +46,8 @@
         <script src="<?php echo BASE_URL; ?>/assets/js/bootstrap.min.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/script.js"></script>
 
+    <div id="retorno"> </div>    
     </body>
     
-    <script type="text/javascript">
-        $(document).ready(function(){
-            var medico = $('#medico').attr('id');
-            $.ajax({
-                type: 'POST',
-                url: BASE_URL + '/ajax/listar_combos',
-                data: {medico: medico},
-                dataType: 'json',
-                success: function(data) {
-                    var html = '';
-
-                    for (var i in data) {
-                        html += '<option value=' + data[i].id_medico + '>' + data[i].nome_med + '</option>';
-                    }
-                    
-                    $('#medico').html(html);
-                }
-            });
-        });        
-    </script>    
+ 
 </html>

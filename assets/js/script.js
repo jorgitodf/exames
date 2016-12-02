@@ -1,6 +1,4 @@
-
 $(function () {
-
     $('#ver_valor_ref').on('mouseover', function () {
         var id = $('#id_resultado_exame').val();
         var datatype = $('#id_resultado_exame').attr('data-type');
@@ -33,10 +31,15 @@ $(function () {
 
     $('#ver_valor_ref').on('mouseout', function () {
         $('.referencia_resultado').hide();
-
+    });
+    
+    $('#novo_exame').on('click', function () {
+        $("#salvar_exame").removeAttr('disabled');
     });
 
     $("#form_exa_cad").on('submit', function (e) {
+        $(".msgError").html("");
+        $(".msgError").css("display","none");
         var num_exame = $('#num_exame').val();
         var data_exame = $('#data_exame').val();
         var medico = $('#medico').val();
@@ -47,57 +50,20 @@ $(function () {
             type: 'POST',
             url: $(this).attr("action"),
             data: {num_exame: num_exame, data_exame: data_exame, medico: medico, lab: lab, tipo_exame: tipo_exame},
-            dataType: 'json',
-            success: function(data) {
-                
-                if ($('.div_erro_num_exame').length == 0 && data.erro1 != "") {
-                    $('#num_exame').after('<div class="div_erro_num_exame">'+data.erro1+'</div>');
-                } else if ($('.div_erro_num_exame').length > 0 && data.erro1 != "") {
-                    $('#num_exame').text(''+data.erro1+'');
-                } else {
-                    $('.div_erro_num_exame').hide();
+            success: function(retorno) {
+                beforeSend:$("#retorno").html(retorno);            
+                var sucesso = $("#sucessoError").text();    
+                    if (sucesso == 'Exame Cadastrado com Sucesso!'){
+                        $("#salvar_exame").attr('disabled', 'disabled');
+                    }
                 }
-
-                if ($('.div_erro_data_exame').length == 0 && data.erro2 != "") {
-                    $('#data_exame').after('<div class="div_erro_data_exame">'+data.erro2+'</div>');
-                } else if ($('.div_erro_data_exame').length > 0 && data.erro2 != "") {
-                    $('#num_exame').text(''+data.erro2+'');
-                } else {
-                    $('.div_erro_data_exame').hide();
-                }
-                
-                if ($('.div_erro_medico').length == 0 && data.erro3 != "") {
-                    $('#medico').after('<div class="div_erro_medico">'+data.erro3+'</div>');
-                } else if ($('.div_erro_medico').length > 0 && data.erro3 != "") {
-                    $('#medico').text(''+data.erro3+'');
-                } else {
-                    $('.div_erro_medico').hide();
-                } 
-                
-                if ($('.div_erro_lab').length == 0 && data.erro4 != "") {
-                    $('#lab').after('<div class="div_erro_lab">'+data.erro4+'</div>');
-                } else if ($('.div_erro_lab').length > 0 && data.erro4 != "") {
-                    $('#lab').text(''+data.erro4+'');
-                } else {
-                    $('.div_erro_lab').hide();
-                }
-                
-                if ($('.div_erro_tipo_exame').length == 0 && data.erro5 != "") {
-                    $('#tipo_exame').after('<div class="div_erro_tipo_exame">'+data.erro5+'</div>');
-                } else if ($('.div_erro_tipo_exame').length > 0 && data.erro5 != "") {
-                    $('#tipo_exame').text(''+data.erro5+'');
-                } else {
-                    $('.div_erro_tipo_exame').hide();
-                }
-                
-                if (data.sucesso != "") {
-                    alert(data.sucesso);
-                }
-                
-                
-            }
         });
     });
+
+
+
+
+
 
     $(document).on('ready', function () {
         var num_exame = $('#num_exame').val();
@@ -155,10 +121,3 @@ $(function () {
     });
 
 });
-
-
-
-
-
-
-
