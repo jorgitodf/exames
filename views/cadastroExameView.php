@@ -1,7 +1,7 @@
 
 <section class="container col-sm-12 col-md-12">
     <div class="form_cadastro_exame col-sm-12 col-md-12">
-        <form method="POST" action="<?php echo BASE_URL; ?>/cadastro/cadastrar_cliente" class="form_exame_cadastro" id="form_exa_cad">
+        <form method="POST" action="<?php echo BASE_URL; ?>/cadastro/cadastrar_exame" class="form_exame_cadastro" id="form_exa_cad">
             <aside class="panel panel-info" id="panel_form_cadastro_exame">
                 <div class="panel-heading" id="panel_form_cadastro_exame_heading">
                     <h3 class="panel-title">Cadastro de Novo Exame</h3>
@@ -20,9 +20,6 @@
                         <label for="data_exame" class="control-label">Médico:</label>
                         <select class="form-control" name="medico" id="medico" >
                             <option></option>
-                                <?php foreach ($medicos as $linha): ?> 
-                                    <option value="<?php echo $linha['id_medico']; ?>"><?php echo $linha['nome_med']; ?> </option>
-                                <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">

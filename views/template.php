@@ -9,6 +9,7 @@
         <script type="text/javascript">var BASE_URL = '<?php echo BASE_URL; ?>';</script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
+
     <body>
         <header class="header white-bg">
             <div class="sidebar-toggle-box">
@@ -46,4 +47,25 @@
         <script src="<?php echo BASE_URL; ?>/assets/js/script.js"></script>
 
     </body>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var medico = $('#medico').attr('id');
+            $.ajax({
+                type: 'POST',
+                url: BASE_URL + '/ajax/listar_combos',
+                data: {medico: medico},
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+
+                    for (var i in data) {
+                        html += '<option value=' + data[i].id_medico + '>' + data[i].nome_med + '</option>';
+                    }
+                    
+                    $('#medico').html(html);
+                }
+            });
+        });        
+    </script>    
 </html>

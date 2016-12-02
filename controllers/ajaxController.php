@@ -3,10 +3,12 @@
 class ajaxController extends controller {
 
     protected $referenciasModel;
+    protected $medicosModel;
     
     public function __construct() {
         parent::__construct();
         $this->referenciasModel = new ReferenciasModel();
+        $this->medicosModel = new MedicosModel();
     }    
 
     public function index(){}
@@ -29,6 +31,15 @@ class ajaxController extends controller {
         
         echo json_encode(array("erro1" => $erro1, "erro2" => $erro2));
     }
+    
+    public function listar_combos() {
+        if(isset($_POST['medico']) && !empty($_POST['medico'])) {
+            $medico = $_POST['medico'];
+            $data = $this->medicosModel->listarMedicos($medico);
+        }
+        echo json_encode($data);
+        
+    }    
 
 
     

@@ -405,6 +405,44 @@
         border: 1px solid #CCC;
         float: left;
     }
+    
+   .div_view_referencia_exame {
+        margin-top: 8%;
+    }
+    #panel_view_referencia_exame {
+        width: 40%;
+        border-radius: 10px;
+        margin-left: 30%;
+        -webkit-border-radius: 7px;
+        border: 1px solid #CCC;
+        box-shadow: #CCC;
+    }
+    .tab_referencia_exame {
+        width: 420px;
+        border: 1px black solid;
+        margin-left: 13%;
+        margin-top: 2%;
+    }
+    #tab_ref_exame > tbody > tr > td {
+        text-align: center;
+    }
+    #tab_ref_exame > thead > tr > th {
+        text-align: center;
+        padding: 4px;
+        background-color: #E8E8E8;
+        color: black;
+        border: 0;
+    }
+    #botao_voltar {
+        margin-left: 68%;
+        margin-top: auto;
+    }
+    
+    .div_erro_num_exame, .div_erro_data_exame, .div_erro_medico, .div_erro_lab, .div_erro_tipo_exame {
+        color: red;
+        font-size: 10px;
+        padding: 0;
+    }
 }
 
 

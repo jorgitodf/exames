@@ -15,7 +15,6 @@ class cadastroController extends Controller {
 
     public function index() {
         $dados = array();
-        $dados['medicos'] = $this->medicosModel->getMedicos();
         $dados['labs'] = $this->laboratoriosModel->getLaboratorios();
         $dados['tipoExame'] = $this->laboratoriosModel->getTipoExame();
         $this->loadTemplate('cadastroExameView', $dados);
@@ -56,21 +55,39 @@ class cadastroController extends Controller {
         $this->loadTemplate('cadastroExameView', $dados); */
     }
     
-    public function cadastrar_cliente() {
-        if (isset($_POST['num_exame']) && empty($_POST['num_exame'])) {
-            $erro1 = "Campo num_exame vazio";
-            $status = false;
-        }    
-        if (isset($_POST['data_exame']) && empty($_POST['data_exame'])) {
-            $erro2 = "Campo data_exame vazio";
-            $status = false;
-        }    
-        if ($status != true) {
-            echo json_encode(array("erro1" => $erro1, "erro2" => $erro2));
-        } else {
-            echo "OK";
-        }
+    public function cadastrar_exame() {
         
+        $num_exame = $_POST['num_exame'];
+        $data_exame = $_POST['data_exame'];
+        $medico = $_POST['medico'];
+        $lab = $_POST['lab'];
+        $tipo_exame = $_POST['tipo_exame'];
+       
+        $erros = array('erro1'=>'','erro2'=>'','erro3'=>'','erro4'=>'','erro5'=>'','sucesso'=>'');
+        
+        if (isset($num_exame) && empty($num_exame)) {
+            $erros['erro1'] = "Número do Exame obrigatório!";
+        } 
+        if (isset($data_exame) && empty($data_exame)) {
+            $erros['erro2'] = "Data do Exame obrigatória!";
+        } 
+        if (isset($medico) && empty($medico)) {
+            $erros['erro3'] = "Selecione um(a) Médico(a)!";
+        } 
+        if (isset($lab) && empty($lab)) {
+            $erros['erro4'] = "Selecione um Laboratório!";
+        } 
+        if (isset($tipo_exame) && empty($tipo_exame)) {
+            $erros['erro5'] = "Selecione um Tipo de Exame!";
+        } 
+        if (!empty($num_exame) && !empty($data_exame)) {
+            $erros['sucesso'] = "Dados Cadastrados";
+        }
+            
+        echo json_encode($erros);
+       
     }
+    
+
     
 }
