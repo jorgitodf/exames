@@ -1,7 +1,7 @@
 <?php
 
 class ExamesModel extends Model {
-
+    
     public function __construct() {
         parent::__construct();
     }
@@ -68,7 +68,7 @@ class ExamesModel extends Model {
         }
     }
 
-     public function contaExames() {
+    public function contaExames() {
         $dados = array();
         $data = array();
         $stmt = $this->db->prepare("SELECT distinct(SELECT EXTRACT(year FROM data_exame)) AS data FROM tb_exame ORDER BY data ASC");
@@ -84,6 +84,30 @@ class ExamesModel extends Model {
         }   
         return $dados;
     }   
+    
+    public function cadastrarNovoExame($exame) {
+        if (isset($exame) && !empty($exame)) {
+            $stmt = $this->db->prepare("INSERT INTO tb_exame (num_exame,data_exame,fk_paciente,fk_medico,fk_laboratorio,fk_tipo_exame) 
+                VALUES (?,?,?,?,?,?)");
+            $stmt->bindValue(1, $exame['num_exame'], PDO::PARAM_STR);
+            $stmt->bindValue(2, $exame['data_exame'], PDO::PARAM_STR);
+            $stmt->bindValue(3, $exame['fk_paciente'], PDO::PARAM_INT);
+            $stmt->bindValue(4, $exame['fk_medico'], PDO::PARAM_INT);
+            $stmt->bindValue(5, $exame['fk_laboratorio'], PDO::PARAM_INT);
+            $stmt->bindValue(6, $exame['fk_tipo_exame'], PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                return 1;
+            }
+        }
+    }
+    
+    public function getLastIdExame() {
+        $stmt = $this->db->query("SELECT id_exame FROM tb_exame ORDER BY id_exame DESC LIMIT 1");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     
     
     
@@ -110,8 +134,6 @@ class ExamesModel extends Model {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-
 
     public function cadastrarConta($nomeBanco, $codAgencia, $digAgencia, $tipoConta, $numConta, $digConta, $codOperacao, $idUser) {
         if (!empty($nomeBanco) && !empty($codAgencia) && !empty($tipoConta) && !empty($numConta) && !empty($digConta) && !empty($idUser)) {

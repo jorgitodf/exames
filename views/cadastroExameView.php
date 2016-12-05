@@ -49,13 +49,16 @@
                                     <?php endforeach; ?>
                             </select>
                             <span class="msgError" id="tipoExameError">erro</span>
+                            <span class="msgError" id="idExame">id</span>
                         </div>
                     </div>
                     <br/>    
                     <div class="col-sm-12 col-md-12">
                         <div class="form-group" id="div_btn_salvar">
-                            <button type="button" class="btn btn-success" id="novo_exame">Novo Exame</button>
-                            <button type="submit" class="btn btn-success" id="salvar_exame" disabled="disabled">Salvar</button>
+                            <button type="button" id="novo_exame" class="btn btn-success">Novo Exame</button>
+                            <button type="submit" id="salvar_exame" class="btn btn-success" disabled="disabled">Salvar</button>
+                            <button type="button" id="btn_sel_exame" class="btn btn-success" onclick="javascript:window.location.href='<?php echo BASE_URL; ?>/cadastro/cadastrar_exame_detalhe'" disabled="disabled">Selecionar Exames</button>
+                            
                         </div>
                         <div class="form-group" id="div_sucessoError">
                             <div class="alert alert-success" id="sucessoError">msgSucess</div>

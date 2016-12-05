@@ -621,8 +621,16 @@
     #div_sucessoError {
         float: left;
         width: 250px;
-        margin-left: 33.5%;
+        margin-left: 15%;
         text-align: center;
+    }
+    a.botao:hover, a.botao:focus {
+        text-decoration: none;
+        outline: none;
+        color: white;
+    }
+    a.botao {
+        color: white;
     }
 }
 

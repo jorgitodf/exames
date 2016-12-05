@@ -19,41 +19,6 @@ class cadastroController extends Controller {
         $dados['tipoExame'] = $this->laboratoriosModel->getTipoExame();
         $dados['medicos'] = $this->medicosModel->getMedicos();
         $this->loadTemplate('cadastroExameView', $dados);
-
-
-
-        /*
-        $status = "";
-        if (isset($_POST['num_exame']) && empty($_POST['num_exame'])) {
-            echo "Campo num_exame vazio";
-            $status = false;
-        }
-        if (isset($_POST['data_exame']) && empty($_POST['data_exame'])) {
-            echo "Campo data_exame vazio";
-            $status = false;
-        }
-        if (isset($_POST['medico']) && empty($_POST['medico'])) {
-            echo "Campo medico vazio";
-            $status = false;
-        }
-        if (isset($_POST['lab']) && empty($_POST['lab'])) {
-            echo "Campo lab vazio";
-            $status = false;
-        }
-        if (isset($_POST['tipo_exame']) && empty($_POST['tipo_exame'])) {
-            echo "Campo tipo_exame vazio";
-            $status = false;
-        }
-        
-        if ($status == true) {
-            $nomeExame = trim(addslashes($_POST['num_exame']));
-            $dataExame = trim(addslashes($_POST['data_exame']));
-            $medico = trim(addslashes($_POST['medico']));
-            $lab = trim(addslashes($_POST['lab']));
-            $tipoExame = trim(addslashes($_POST['tipo_exame']));
-        }    
-        
-        $this->loadTemplate('cadastroExameView', $dados); */
     }
     
     public function cadastrar_exame() {
@@ -64,93 +29,59 @@ class cadastroController extends Controller {
             
             $num_exame = addslashes($_POST['num_exame']);
             $data_exame = addslashes($_POST['data_exame']);
-            $medico = intval(addslashes($_POST['medico']));
-            $lab = intval(addslashes($_POST['lab']));
-            $tipo_exame = intval(addslashes($_POST['tipo_exame']));
+            $medico = addslashes($_POST['medico']);
+            $lab = addslashes($_POST['lab']);
+            $tipo_exame = addslashes($_POST['tipo_exame']);
             
-            ValidacoesHelper::validarNumeroExame($numeroExame);
-            
-            if (empty($num_exame)) {
-                $erroNumExame = '
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#numExameError").html("Número do Exame é obrigatório!");
-                        $("#numExameError").css("display","block");
-                    });
-                </script>';
-                $status = false;
-                echo $erroNumExame;
-            } else if (!is_numeric($num_exame)) {
-                $erroNumExame = '
-                    <script type="text/javascript">
-                        $(document).ready(function() {
-                            $("#numExameError").html("Número do Exame só aceita números");
-                            $("#numExameError").css("display","block");
-                        });
-                    </script>';
-                echo $erroNumExame;			
+            ValidacoesHelper::validarNumeroExame($num_exame);
+            if (ValidacoesHelper::validarNumeroExame($num_exame) == TRUE) {
+                $status = FALSE;
+                echo ValidacoesHelper::validarNumeroExame($num_exame);
             }
-            
-            if (empty($data_exame)) {
-                $erroDataExame = '
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#dataExameError").html("Data do Exame é obrigatória!");
-                        $("#dataExameError").css("display","block");
-                    });
-                </script>';
-                $status = false;
-                echo $erroDataExame;
-            } 
-            if (empty($medico)) {
-                $erroMed = '
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#medicoError").html("Informe um Médico!");
-                        $("#medicoError").css("display","block");
-                    });
-                </script>';
-                $status = false;
-                echo $erroMed;
+            ValidacoesHelper::validarData($data_exame);
+            if (ValidacoesHelper::validarData($data_exame) == TRUE) {
+                $status = FALSE;
+                echo ValidacoesHelper::validarData($data_exame);
             }
-            if (empty($lab)) {
-                $erroLab = '
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#laboratotioError").html("Informe um Laboratório!");
-                        $("#laboratotioError").css("display","block");
-                    });
-                </script>';
-                $status = false;
-                echo $erroLab;
-            } 
-            if (empty($tipo_exame)) {
-                $erroTipoExame = '
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#tipoExameError").html("Informe um Tipo de Exame!");
-                        $("#tipoExameError").css("display","block");
-                    });
-                </script>';
-                $status = false;
-                echo $erroTipoExame;
-            } 
+            ValidacoesHelper::validarMedico($medico);
+            if (ValidacoesHelper::validarMedico($medico) == TRUE) {
+                $status = FALSE;
+                echo ValidacoesHelper::validarMedico($medico);
+            }
+            ValidacoesHelper::validarLab($lab);
+            if (ValidacoesHelper::validarLab($lab) == TRUE) {
+                $status = FALSE;
+                echo ValidacoesHelper::validarLab($lab);
+            }
+            ValidacoesHelper::validarTipoExame($tipo_exame);
+            if (ValidacoesHelper::validarTipoExame($tipo_exame) == TRUE) {
+                $status = FALSE;
+                echo ValidacoesHelper::validarTipoExame($tipo_exame);
+            }
             
             if ($status == TRUE) {
-                echo '
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#sucessoError").html("Exame Cadastrado com Sucesso !");
-                        $("#sucessoError").css("display","block");
-                    });
-                </script> ';  
-                
+                $exame = array('num_exame'=>$num_exame,'data_exame'=>$data_exame,'fk_paciente'=>1,'fk_medico'=>$medico,
+                    'fk_laboratorio'=>$lab,'fk_tipo_exame'=>$tipo_exame);
+                if ($this->examesModel->cadastrarNovoExame($exame) == TRUE) {
+                    echo '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#sucessoError").html("Exame Cadastrado com Sucesso!");
+                            $("#sucessoError").css("display","block");
+                        });
+                    </script> ';  
+                }
             }
             
-        } else {
+        } /* else {
             $this->index();
-        }
+        } */
        
+    }
+    
+    public function cadastrar_exame_detalhe() {
+        $id = $this->examesModel->getLastIdExame();
+        echo $id[0]['id_exame'];
     }
     
 
