@@ -35,19 +35,18 @@
         </header>
 
         <main class="">
-            <?php $this->loadViewInTemplate($viewName, $viewData); ?>        
+            <?php $this->loadViewInTemplate($viewName, $viewData); ?>   
         </main>
 
         <footer>
         </footer>
-
         <script src="<?php echo BASE_URL; ?>/assets/js/jquery-3.1.0.min.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/jquery.maskMoney.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/bootstrap.min.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/script.js"></script>
+        
 
-    <div id="retorno"> </div>    
     </body>
-    
+    <div id="retorno"></div>
  
 </html>

@@ -61,7 +61,8 @@
                             
                         </div>
                         <div class="form-group" id="div_sucessoError">
-                            <div class="alert alert-success" id="sucessoError">msgSucess</div>
+                            <div class="alert alert-success sucessoError" id="sucessoError">msgSucesso</div>
+                            <div class="alert alert-success" id="semsucessoError">msgSemSucesso</div>
                         </div>
                     </div>
                 </div>   
@@ -69,5 +70,5 @@
         </form>
         
     </div>
-
+    	
 </section>

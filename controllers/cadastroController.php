@@ -70,6 +70,14 @@ class cadastroController extends Controller {
                             $("#sucessoError").css("display","block");
                         });
                     </script> ';  
+                } else {
+                    echo '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#semsucessoError").html("Cadastro do Exame não realizado!");
+                            $("#semsucessoError").css("display","block");
+                        });
+                    </script> '; 				
                 }
             }
             
@@ -80,8 +88,12 @@ class cadastroController extends Controller {
     }
     
     public function cadastrar_exame_detalhe() {
+        $dados = array();
         $id = $this->examesModel->getLastIdExame();
-        echo $id[0]['id_exame'];
+        $idExame = $id[0]['id_exame'];
+        $dados['examesPorGrupo'] = $this->examesModel->listarExamesPorGrupo($idExame);
+        $this->loadTemplate('cadastroExameDetalhe', $dados);
+        
     }
     
 
