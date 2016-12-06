@@ -1,7 +1,7 @@
 <?php
 
 class cadastroController extends Controller {
-    
+
     protected $examesModel;
     protected $medicosModel;
     protected $laboratoriosModel;
@@ -20,19 +20,19 @@ class cadastroController extends Controller {
         $dados['medicos'] = $this->medicosModel->getMedicos();
         $this->loadTemplate('cadastroExameView', $dados);
     }
-    
+
     public function cadastrar_exame() {
-        
+
         if (isset($_POST)) {
-            
+
             $status = TRUE;
-            
+
             $num_exame = addslashes($_POST['num_exame']);
             $data_exame = addslashes($_POST['data_exame']);
             $medico = addslashes($_POST['medico']);
             $lab = addslashes($_POST['lab']);
             $tipo_exame = addslashes($_POST['tipo_exame']);
-            
+
             ValidacoesHelper::validarNumeroExame($num_exame);
             if (ValidacoesHelper::validarNumeroExame($num_exame) == TRUE) {
                 $status = FALSE;
@@ -58,10 +58,10 @@ class cadastroController extends Controller {
                 $status = FALSE;
                 echo ValidacoesHelper::validarTipoExame($tipo_exame);
             }
-            
+
             if ($status == TRUE) {
-                $exame = array('num_exame'=>$num_exame,'data_exame'=>$data_exame,'fk_paciente'=>1,'fk_medico'=>$medico,
-                    'fk_laboratorio'=>$lab,'fk_tipo_exame'=>$tipo_exame);
+                $exame = array('num_exame' => $num_exame, 'data_exame' => $data_exame, 'fk_paciente' => 1, 'fk_medico' => $medico,
+                    'fk_laboratorio' => $lab, 'fk_tipo_exame' => $tipo_exame);
                 if ($this->examesModel->cadastrarNovoExame($exame) == TRUE) {
                     echo '
                     <script type="text/javascript">
@@ -69,7 +69,7 @@ class cadastroController extends Controller {
                             $("#sucessoError").html("Exame Cadastrado com Sucesso!");
                             $("#sucessoError").css("display","block");
                         });
-                    </script> ';  
+                    </script> ';
                 } else {
                     echo '
                     <script type="text/javascript">
@@ -77,25 +77,55 @@ class cadastroController extends Controller {
                             $("#semsucessoError").html("Cadastro do Exame não realizado!");
                             $("#semsucessoError").css("display","block");
                         });
-                    </script> '; 				
+                    </script> ';
                 }
             }
-            
         } /* else {
-            $this->index();
-        } */
-       
+          $this->index();
+          } */
     }
-    
+
     public function cadastrar_exame_detalhe() {
         $dados = array();
         $id = $this->examesModel->getLastIdExame();
         $idExame = $id[0]['id_exame'];
         $dados['examesPorGrupo'] = $this->examesModel->listarExamesPorGrupo($idExame);
+        $dados['idExame'] = $idExame;
         $this->loadTemplate('cadastroExameDetalhe', $dados);
-        
     }
-    
 
-    
+    public function selecionar_exames() {
+        if (isset($_POST)) {
+            $status = TRUE;
+            $idExamesDetalhe = "";
+            $idExame = intval($_POST['idExame']);
+            if (!isset($_POST['exames'])) {
+                ValidacoesHelper::validarExameDetalhe($idExamesDetalhe);
+                $status = FALSE;
+                echo ValidacoesHelper::validarExameDetalhe($idExamesDetalhe);
+            }
+            if ($status == TRUE) {
+                $idExamesDetalhe = $_POST['exames'];
+                if ($this->examesModel->selecionarExames($idExame, $idExamesDetalhe) == true ) {
+                    echo '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#msgSucessoExameDetalhe").html("Exames Selecionados Cadastrados com Sucesso");
+                            $("#msgSucessoExameDetalhe").css("display","block");
+                        });
+                    </script> ';
+                } else {
+                    echo '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#msgErroExameDetalhe").html("Exames Selecionados não cadastrados!");
+                            $("#msgErroExameDetalhe").css("display","block");
+                        });
+                    </script> ';
+                }
+            }
+            
+        }
+    }
+
 }

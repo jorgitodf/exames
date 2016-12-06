@@ -160,5 +160,31 @@ class ExamesModel extends Model {
         $stmt = $this->db->query("SELECT id_exame FROM tb_exame ORDER BY id_exame DESC LIMIT 1");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function selecionarExames($idExame, $idExamesDetalhe) {
+        if ((isset($idExame) && !empty($idExame)) && (isset($idExamesDetalhe) && !empty($idExamesDetalhe))) {
+            
+            try {
+                $this->db->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+                $this->db->beginTransaction();
+                
+                foreach ($idExamesDetalhe as $value) {
+                    $stmt = $this->db->prepare("INSERT INTO tb_resultado_exame (fk_ame, fk_nome_exame) VALUES (?, ?)");
+                    $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+                    $stmt->bindValue(2, $value, PDO::PARAM_INT);
+                    $stmt->execute();
+                }
+                
+                $this->db->commit();
+                return true;
+                
+            } catch (PDOException $exc) {
+                $this->db->rollback();
+                printf($exc);
+                return false;
+            }
+
+        } 
+    }
 
 }

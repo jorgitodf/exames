@@ -75,6 +75,19 @@ class ValidacoesHelper {
             return $erro;
         }  
     }
+    
+    public static function validarExameDetalhe($idExamesDetalhe) {
+        if (empty($idExamesDetalhe) || $idExamesDetalhe == "") {
+            $erro = '
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#exameDetalheError").html("Selecione ao menos um Exame!");
+                    $("#exameDetalheError").css("display","block");
+                });
+            </script>';
+            return $erro;
+        } 
+    }
 
 
 }

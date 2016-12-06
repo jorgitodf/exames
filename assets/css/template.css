@@ -316,6 +316,27 @@
         font-size: 11px;
         display: none;
     }
+    #form_cad_grupo_1 {
+        margin-left: 2%;
+    }
+    #msgSucessoExameDetalhe {
+        color: green;
+        font-weight: bold;
+        font-size: 12px;
+        text-align: center;
+        width: 40%;
+        margin-left: 0;
+        display: none;
+    }
+    #msgErroExameDetalhe {
+        color: red;
+        font-weight: bold;
+        font-size: 12px;
+        text-align: center;
+        width: 40%;
+        margin-left: 0;
+        display: none;
+    }
 
 }
 

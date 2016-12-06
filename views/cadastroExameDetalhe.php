@@ -12,21 +12,29 @@
         
         <div class="tab-content" id="div_table">
             <div id="lipidico" class="tab-pane active in fade">
-                <?php isset($examesPorGrupo['grupo1']) ? $examesPorGrupo['grupo1'] : ""; ?>
-                <form method="POST" action="<?php echo BASE_URL; ?>/cadastro/selecionar_exames" class="" id="">
-                    <?php foreach ($examesPorGrupo['grupo1'] as $linha): ?>
-                    <div class="form-group checkbox">
-                        <label>
-                            <input type="checkbox" value="<?php echo $linha['id_nome_exame']; ?>"><?php echo $linha['nome_exame']; ?>
-                        </label>
-                    </div>
-                    <?php endforeach; ?>  
-                    <div class="form-group">
-                        <div class="div_btn_sair">
-                            <button type="submit" id="" class="btn btn-success">Salvar</button>
+                <aside id="form_cad_grupo_1">
+                    <?php isset($examesPorGrupo['grupo1']) ? $examesPorGrupo['grupo1'] : ""; ?>
+                    <?php isset($idExame) ? $idExame : ""; ?>
+                    <form method="POST" action="<?php echo BASE_URL; ?>/cadastro/selecionar_exames" class="" id="form_grupo_1">
+                        <input type="hidden" value="<?php echo $idExame; ?>" name="idExame" />
+                        <?php foreach ($examesPorGrupo['grupo1'] as $linha): ?>
+                        <div class="form-group checkbox">
+                            <input type="checkbox" name="exames[]" value="<?php echo $linha['id_nome_exame']; ?>" id="linha_<?php echo $linha['id_nome_exame']; ?>" />
+                            <label for="linha_<?php echo $linha['id_nome_exame']; ?>"><?php echo $linha['nome_exame']; ?></label>
                         </div>
-                    </div>
-                </form>    
+                        <?php endforeach; ?>  
+                        <div class="form-group">
+                            <div class="div_btn_sair">
+                                <button type="submit" id="btn_exame_detalhe_grupo1" class="btn btn-success">Salvar</button>
+                            </div>
+                            <span class="msgError" id="exameDetalheError">exameDetalheError</span>
+                        </div>
+                        <div class="form-group" id="">
+                            <div class="alert alert-success" id="msgSucessoExameDetalhe">msgSucessoCadastro</div>
+                            <div class="alert alert-danger" id="msgErroExameDetalhe">msgErroCadastro</div>
+                        </div>
+                    </form>
+                </aside>     
             </div>
             
             <div id="hemograma" class="tab-pane">
