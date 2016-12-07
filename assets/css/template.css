@@ -316,10 +316,10 @@
         font-size: 11px;
         display: none;
     }
-    #form_cad_grupo_1 {
+    #form_cad_grupo_1, #form_cad_grupo_2, #form_cad_grupo_3, #form_cad_grupo_4, #form_cad_grupo_5, #form_cad_grupo_6 {
         margin-left: 2%;
     }
-    #msgSucessoExameDetalhe {
+    #msgSucessoExameDetalheG1, #msgSucessoExameDetalheG2, #msgSucessoExameDetalheG3, #msgSucessoExameDetalheG4, #msgSucessoExameDetalheG5, #msgSucessoExameDetalheG6 {
         color: green;
         font-weight: bold;
         font-size: 12px;
@@ -328,7 +328,7 @@
         margin-left: 0;
         display: none;
     }
-    #msgErroExameDetalhe {
+    #msgErroExameDetalheG1, #msgErroExameDetalheG2, #msgErroExameDetalheG3, #msgErroExameDetalheG4, #msgErroExameDetalheG5, #msgErroExameDetalheG6 {
         color: red;
         font-weight: bold;
         font-size: 12px;
@@ -338,6 +338,66 @@
         display: none;
     }
 
+    /*FORMULÁRIO DE CADASTRO DE TIPO DE EXAMES*/
+    #panel_form_cadastro_tipo_de_exame {
+        width: 75%;
+        margin-left: 11.8%;
+        border-radius: 5px;
+        -webkit-border-radius: 7px;
+        border: 1px solid #adadad;
+        box-shadow: #28a4c9;
+    }
+    #panel_form_cadastro_tipo_de_exame_heading {
+        background-color: #DCDCDC;
+        border: 0 solid #adadad;
+    }
+    #panel_form_cadastro_tipo_de_exame_heading > h3 {
+        color: #8B8B83;
+        font-weight: bold;
+    }
+    #div_tipo_de_exame {
+        margin-left: 3%;
+        float: left;
+    }
+    #div_tipo_de_exame > input {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        -webkit-border-radius: 7px;
+        border: 1px solid #adadad;
+        box-shadow: #28a4c9;
+        font-size: 12px;
+        width: 120%;
+    }
+    #div_tipo_de_exame_error {
+        float: left;
+        margin-left: 15%;
+    }
+    #div_medida_de_exame {
+        margin-left: 3%;
+        clear: both;
+    }
+    #div_medida_de_exame > div > input {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        -webkit-border-radius: 7px;
+        border: 1px solid #adadad;
+        box-shadow: #28a4c9;
+        font-size: 12px;
+        width: 120%;
+    }
+    #div_grupo_de_exame {
+        margin-left: 12%;
+        float: left;
+    }
+    #div_grupo_de_exame > div > select {
+        margin-bottom: 15px;
+        border-radius: 10px;
+        -webkit-border-radius: 7px;
+        border: 1px solid #adadad;
+        box-shadow: #28a4c9;
+        font-size: 12px;
+        width: 100%;
+    }
 }
 
 @media (min-width: 1440px) {

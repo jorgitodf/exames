@@ -43,7 +43,7 @@
                 <?php endif;?>
             </div>
             
-            <div id="hemograma" class="tab-pane">
+            <div id="hemograma" class="tab-pane fade">
                 <?php isset($exameDetalhe['grupo2']) ? $exameDetalhe['grupo2'] : ""; ?>
                 <?php if (!empty($exameDetalhe['grupo2'])): ?>
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
@@ -74,7 +74,7 @@
                     </div>
                 <?php endif;?>
             </div>
-            <div id="hormonio" class="tab-pane">
+            <div id="hormonio" class="tab-pane fade">
                 <?php isset($exameDetalhe['grupo3']) ? $exameDetalhe['grupo3'] : "<h3>Não foi realizado exames</h3>"; ?>
                 <?php if (!empty($exameDetalhe['grupo3'])): ?>
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
@@ -105,7 +105,7 @@
                     </div>
                 <?php endif;?>
             </div>
-            <div id="testo" class="tab-pane">
+            <div id="testo" class="tab-pane fade">
                 <?php isset($exameDetalhe['grupo4']) ? $exameDetalhe['grupo4'] : "<h3>Não foi realizado exames</h3>"; ?>
                 <?php if (!empty($exameDetalhe['grupo4'])): ?>
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
@@ -136,7 +136,7 @@
                     </div>
                 <?php endif;?>
             </div>
-            <div id="geral" class="tab-pane">
+            <div id="geral" class="tab-pane fade">
                 <?php isset($exameDetalhe['grupo5']) ? $exameDetalhe['grupo5'] : "<h3>Não foi realizado exames</h3>"; ?>
                 <?php if (!empty($exameDetalhe['grupo5'])): ?>
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">
@@ -167,7 +167,7 @@
                     </div>
                 <?php endif;?>
             </div>
-            <div id="urina" class="tab-pane">
+            <div id="urina" class="tab-pane fade">
                 <?php isset($exameDetalhe['grupo6']) ? $exameDetalhe['grupo6'] : "<h3>Não foi realizado exames</h3>"; ?>
                 <?php if (!empty($exameDetalhe['grupo6'])): ?>
                 <table class="table table-bordered table-responsive table-hover table-condensed" id="table_exame_detalhado">

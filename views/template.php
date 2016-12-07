@@ -11,6 +11,7 @@
     </head>
 
     <body>
+        
         <header class="header white-bg">
             <div class="sidebar-toggle-box">
                 <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
@@ -28,6 +29,7 @@
                         <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">Cadastros<b class=" fa fa-angle-down"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo BASE_URL; ?>/cadastro">Exame</a></li>
+                            <li><a href="<?php echo BASE_URL; ?>/cadastro/cadastrartipoexame">Tipo de Exame</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -40,13 +42,14 @@
 
         <footer>
         </footer>
+        <div id="retorno"></div>
         <script src="<?php echo BASE_URL; ?>/assets/js/jquery-3.1.0.min.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/jquery.maskMoney.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/bootstrap.min.js"></script>
         <script src="<?php echo BASE_URL; ?>/assets/js/script.js"></script>
         
-
+    
     </body>
-    <div id="retorno"></div>
+    
  
 </html>

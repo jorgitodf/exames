@@ -81,13 +81,50 @@ class ValidacoesHelper {
             $erro = '
             <script type="text/javascript">
                 $(document).ready(function() {
-                    $("#exameDetalheError").html("Selecione ao menos um Exame!");
-                    $("#exameDetalheError").css("display","block");
+                    $(".exameDetalheError").html("Selecione ao menos um Exame!");
+                    $(".exameDetalheError").css("display","block");
+                });
+            </script>';
+            return $erro;
+        } 
+    }
+    
+    public static function validarTipoDeExame($tipoExame) {
+        if (empty($tipoExame) || $tipoExame == "") {
+            $erro = '
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#tipoExameError").html("Campo Tipo de Exame Obrigatório!");
+                    $("#tipoExameError").css("display","block");
+                });
+            </script>';
+            return $erro;
+        } 
+    }
+    
+    public static function validarMedida($medidaExame) {
+        if (empty($medidaExame) || $medidaExame == "") {
+            $erro = '
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#medidaExameError").html("Campo Medida Obrigatório!");
+                    $("#medidaExameError").css("display","block");
                 });
             </script>';
             return $erro;
         } 
     }
 
-
+    public static function validarGrupo($grupoExame) {
+        if (empty($grupoExame) || $grupoExame == "") {
+            $erro = '
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#grupoError").html("Selecione um Grupo de Exame!");
+                    $("#grupoError").css("display","block");
+                });
+            </script>';
+            return $erro;
+        } 
+    }
 }

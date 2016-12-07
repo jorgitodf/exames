@@ -164,24 +164,35 @@ class ExamesModel extends Model {
     public function selecionarExames($idExame, $idExamesDetalhe) {
         if ((isset($idExame) && !empty($idExame)) && (isset($idExamesDetalhe) && !empty($idExamesDetalhe))) {
             
-            try {
-                $this->db->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
-                $this->db->beginTransaction();
-                
-                foreach ($idExamesDetalhe as $value) {
-                    $stmt = $this->db->prepare("INSERT INTO tb_resultado_exame (fk_ame, fk_nome_exame) VALUES (?, ?)");
-                    $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
-                    $stmt->bindValue(2, $value, PDO::PARAM_INT);
-                    $stmt->execute();
+            $fks = implode(',', $idExamesDetalhe);
+            $resp = "";
+            $stmt = $this->db->prepare("SELECT fk_nome_exame FROM tb_resultado_exame WHERE fk_nome_exame IN "
+                  . "($fks) AND fk_exame = ?");
+            $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $resp = true;
+            }
+            if ($resp != true) {
+                try {
+                    $this->db->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+                    $this->db->beginTransaction();
+
+                    foreach ($idExamesDetalhe as $value) {
+                        $stmt = $this->db->prepare("INSERT INTO tb_resultado_exame (fk_exame, fk_nome_exame) VALUES (?, ?)");
+                        $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+                        $stmt->bindValue(2, $value, PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
+
+                    $this->db->commit();
+                    return true;
+
+                } catch (PDOException $exc) {
+                    $this->db->rollback();
+                    printf($exc);
+                    return false;
                 }
-                
-                $this->db->commit();
-                return true;
-                
-            } catch (PDOException $exc) {
-                $this->db->rollback();
-                printf($exc);
-                return false;
             }
 
         } 
