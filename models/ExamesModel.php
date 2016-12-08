@@ -138,7 +138,10 @@ class ExamesModel extends Model {
             if ($stmt->rowCount() > 0) {
                 $resp = true;
             }
-            if ($resp != true) {
+            try {
+                $this->db->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+                $this->db->beginTransaction();
+
                 $stmt = $this->db->prepare("INSERT INTO tb_exame (num_exame,data_exame,fk_paciente,fk_medico,fk_laboratorio,fk_tipo_exame) 
                     VALUES (?,?,?,?,?,?)");
                 $stmt->bindValue(1, $exame['num_exame'], PDO::PARAM_STR);
@@ -148,11 +151,15 @@ class ExamesModel extends Model {
                 $stmt->bindValue(5, $exame['fk_laboratorio'], PDO::PARAM_INT);
                 $stmt->bindValue(6, $exame['fk_tipo_exame'], PDO::PARAM_INT);
                 $stmt->execute();
-                if ($stmt->rowCount() > 0) {
-                    return 1;
-                }
+                
+                $this->db->commit();
+                return true;
+
+            } catch (PDOException $exc) {
+                $this->db->rollback();
+                printf($exc);
+                return false;
             }
-            return 0;
         }
     }
     
@@ -194,8 +201,48 @@ class ExamesModel extends Model {
                     return false;
                 }
             }
-
         } 
+    }
+    
+    public function cadastrarTipoDeExame($tipoExame, $medidaExame, $grupoExame) {
+        if (!empty($tipoExame) && !empty($medidaExame) && !empty($grupoExame)) {
+            try {
+                $this->db->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+                $this->db->beginTransaction();
+
+                $stmt = $this->db->prepare("INSERT INTO tb_nome_exame (nome_exame, medida, fk_grupo_exame) VALUES (?,?,?)");
+                $stmt->bindValue(1, $tipoExame, PDO::PARAM_STR);
+                $stmt->bindValue(2, $medidaExame, PDO::PARAM_STR);
+                $stmt->bindValue(3, $grupoExame, PDO::PARAM_INT);
+                $stmt->execute();
+                
+                $this->db->commit();
+                return true;
+
+            } catch (PDOException $exc) {
+                $this->db->rollback();
+                printf($exc);
+                return false;
+            }
+        }
+    }
+    
+    public function verificaExisteTipoDeExame($tipoExame) {
+        $stmt = $this->db->prepare("SELECT nome_exame FROM tb_nome_exame WHERE nome_exame = ?");
+        $stmt->bindValue(1, $tipoExame, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            return 1;
+        }
+    }
+    
+    public function verificaExisteExame($num_exame) {
+        $stmt = $this->db->prepare("SELECT num_exame FROM tb_exame WHERE num_exame = ?");
+        $stmt->bindValue(1, $num_exame, PDO::PARAM_STR);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            return 1;
+        }
     }
 
 }

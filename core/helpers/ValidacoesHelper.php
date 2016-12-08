@@ -127,4 +127,43 @@ class ValidacoesHelper {
             return $erro;
         } 
     }
+    
+    public function validarExameSemReferencia($exameSemRef) {
+        if (empty($exameSemRef) || $exameSemRef == "") {
+            $erro = '
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#exameSemRefError").html("Selecione um Exame!");
+                    $("#exameSemRefError").css("display","block");
+                });
+            </script>';
+            return $erro;
+        } 
+    }
+    
+    public function validarReferenciaExame($refExame) {
+        if (empty($refExame) || $refExame == "") {
+            $erro = '
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#refExameError").html("Campo Referência Obrigatório!");
+                    $("#refExameError").css("display","block");
+                });
+            </script>';
+            return $erro;
+        } 
+    }
+    
+    public function validarValorReferenciaExame($valorRef) {
+        if (empty($valorRef) || $valorRef == "") {
+            $erro = '
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#valorRefError").html("Campo Valor de Referência Obrigatório!");
+                    $("#valorRefError").css("display","block");
+                });
+            </script>';
+            return $erro;
+        }  
+    }
 }

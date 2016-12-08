@@ -64,27 +64,25 @@ class cadastroController extends Controller {
             if ($status == TRUE) {
                 $exame = array('num_exame' => $num_exame, 'data_exame' => $data_exame, 'fk_paciente' => 1, 'fk_medico' => $medico,
                     'fk_laboratorio' => $lab, 'fk_tipo_exame' => $tipo_exame);
-                if ($this->examesModel->cadastrarNovoExame($exame) == TRUE) {
+                if ($this->examesModel->verificaExisteExame($num_exame) == TRUE ) {
                     echo '
                     <script type="text/javascript">
                         $(document).ready(function() {
-                            $("#sucessoError").html("Exame Cadastrado com Sucesso!");
-                            $("#sucessoError").css("display","block");
+                            $("#msgCadExameError").html("Exame já Cadastrado");
+                            $("#msgCadExameError").css("display","block");
                         });
-                    </script> ';
-                } else {
+                    </script> '; 
+                } else if ($this->examesModel->cadastrarNovoExame($exame) == TRUE) {
                     echo '
                     <script type="text/javascript">
                         $(document).ready(function() {
-                            $("#semsucessoError").html("Cadastro do Exame não realizado!");
-                            $("#semsucessoError").css("display","block");
+                            $("#msgCadExameSucesso").html("Exame Cadastrado com Sucesso!");
+                            $("#msgCadExameSucesso").css("display","block");
                         });
-                    </script> ';
+                    </script> '; 
                 }
             }
-        } /* else {
-          $this->index();
-          } */
+        }
     }
 
     public function cadastrar_exame_detalhe() {
@@ -282,8 +280,8 @@ class cadastroController extends Controller {
             $status = TRUE;
             
             $tipoExame = addslashes($_POST['tipo_exame']);
-            $medidaExame = addslashes($_POST['medida_exame']);
-            $grupoExame = addslashes($_POST['grupo_exame']);
+            $medidaExame = $_POST['medida_exame'];
+            $grupoExame = intval(addslashes($_POST['grupo_exame']));
             
             ValidacoesHelper::validarTipoDeExame($tipoExame);
             if (ValidacoesHelper::validarTipoDeExame($tipoExame) == TRUE) {
@@ -299,6 +297,26 @@ class cadastroController extends Controller {
             if (ValidacoesHelper::validarGrupo($grupoExame) == TRUE) {
                 $status = FALSE;
                 echo ValidacoesHelper::validarGrupo($grupoExame);
+            }
+            if ($status == TRUE) {
+                if ($this->examesModel->verificaExisteTipoDeExame($tipoExame) == true ) {
+                    echo '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#cadTipoExameError").html("Tipo de Exame já Cadastrado");
+                            $("#cadTipoExameError").css("display","block");
+                        });
+                    </script> '; 
+                } else if ($this->examesModel->cadastrarTipoDeExame($tipoExame, $medidaExame, $grupoExame) == true ) {
+                    echo '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#cadTipoExameSucesso").html("Tipo de Exame Cadastrado com Sucesso");
+                            $("#cadTipoExameSucesso").css("display","block");
+                        });
+                    </script> '; 
+                }
+ 
             }
         } else {
             $dados['grupos'] = $this->gruposExamesModel->getGruposExames();
