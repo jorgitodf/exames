@@ -39,6 +39,9 @@ class cadastroController extends Controller {
             if (ValidacoesHelper::validarNumeroExame($num_exame) == TRUE) {
                 $status = FALSE;
                 echo ValidacoesHelper::validarNumeroExame($num_exame);
+            } else if ($this->examesModel->verificaExisteExame($num_exame) == TRUE) {
+                $status = FALSE;
+                echo $this->examesModel->verificaExisteExame($num_exame);
             }
             ValidacoesHelper::validarData($data_exame);
             if (ValidacoesHelper::validarData($data_exame) == TRUE) {
@@ -64,15 +67,7 @@ class cadastroController extends Controller {
             if ($status == TRUE) {
                 $exame = array('num_exame' => $num_exame, 'data_exame' => $data_exame, 'fk_paciente' => 1, 'fk_medico' => $medico,
                     'fk_laboratorio' => $lab, 'fk_tipo_exame' => $tipo_exame);
-                if ($this->examesModel->verificaExisteExame($num_exame) == TRUE ) {
-                    echo '
-                    <script type="text/javascript">
-                        $(document).ready(function() {
-                            $("#msgCadExameError").html("Exame já Cadastrado");
-                            $("#msgCadExameError").css("display","block");
-                        });
-                    </script> '; 
-                } else if ($this->examesModel->cadastrarNovoExame($exame) == TRUE) {
+                if ($this->examesModel->cadastrarNovoExame($exame) == TRUE) {
                     echo '
                     <script type="text/javascript">
                         $(document).ready(function() {

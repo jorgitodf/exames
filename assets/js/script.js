@@ -21,6 +21,8 @@ $(document).ready(function() {
             $("#laboratotioError").css("display","none");
             $("#tipoExameError").html("");
             $("#tipoExameError").css("display","none");
+            $("#msgErroExameJaCadastrado").html("");
+            $("#msgErroExameJaCadastrado").css("display","none");
             e.preventDefault();
             $.ajax({
                 type: "POST",
@@ -28,24 +30,17 @@ $(document).ready(function() {
                 data: $(this).serialize(),
                 success: function(retorno) {
                     beforeSend:$("#retorno").html(retorno);
-                    var sucesso = $("#cadTipoExameSucesso").text();
-                    var erro = $("#msgCadExameError").text();
+                    var sucesso = $("#msgCadExameSucesso").text();
                     if (sucesso === 'Exame Cadastrado com Sucesso!') {
-                        $("#div_msg_sucesso_e_sem_sucesso_form_cad_exame").hide();
                         $("#btn_salvar_exame").attr('disabled', 'disabled');
+                        $("#btn_novo_exame").removeAttr('disabled');
                         $("#btn_selecionar_exame").removeAttr('disabled');
                         $("#num_exame").attr('disabled', 'disabled');
                         $("#data_exame").attr('disabled', 'disabled');
                         $("#medico").attr('disabled', 'disabled');
                         $("#lab").attr('disabled', 'disabled');
                         $("#tipo_exame").attr('disabled', 'disabled');
-                        $("#div_msg_erro_e_sem_sucesso_form_cad_exame").hide();
-                    }                    
-                    if (erro === 'Exame já Cadastrado') {
-                        $("#btn_salvar_exame").attr('disabled', 'disabled');
-                        $("#btn_novo_ref_exame").removeAttr('disabled');
-                        $("#btn_novo_exame").removeAttr('disabled');
-                        $("#div_msg_erro_e_sem_sucesso_form_cad_exame").hide();
+                        $("#div_msg_sucesso_e_sem_sucesso_form_cad_exame").hide();
                     }
                     return false;
                 }

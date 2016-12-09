@@ -14,6 +14,7 @@
                         </div>
                         <div class="" id="div_num_exame_error">
                             <div class="" id="numExameError">erro</div>
+                            <div class="alert-danger" id="msgErroExameJaCadastrado">Exame já Cadastrado</div>
                         </div>  
                         <div class="" id="div_data_exame">
                             <label for="data_exame" class="control-label">Data Exame:</label>
@@ -73,8 +74,6 @@
         </form>
         <div class="form-group" id="div_msg_sucesso_e_sem_sucesso_form_cad_exame">
             <div class="alert alert-success" id="msgCadExameSucesso">msgSucesso</div>
-        </div>
-        <div class="form-group" id="div_msg_erro_e_sem_sucesso_form_cad_exame">
             <div class="alert alert-danger" id="msgCadExameError">msgCadExameError</div>
         </div>
     </div>

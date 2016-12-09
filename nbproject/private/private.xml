@@ -5,7 +5,7 @@
             <url>views/cadastroExameView.php</url>
             <bookmark id="1">
                 <name/>
-                <line>59</line>
+                <line>60</line>
                 <key/>
             </bookmark>
         </file>
@@ -14,6 +14,7 @@
         <group>
             <file>file:/C:/xampp/htdocs/exames/assets/css/template.css</file>
             <file>file:/C:/xampp/htdocs/exames/views/cadastroExameView.php</file>
+            <file>file:/C:/xampp/htdocs/exames/controllers/referenciaController.php</file>
             <file>file:/C:/xampp/htdocs/exames/assets/js/script.js</file>
             <file>file:/C:/xampp/htdocs/exames/controllers/cadastroController.php</file>
             <file>file:/C:/xampp/htdocs/exames/models/ExamesModel.php</file>

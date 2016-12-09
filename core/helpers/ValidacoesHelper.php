@@ -128,7 +128,7 @@ class ValidacoesHelper {
         } 
     }
     
-    public function validarExameSemReferencia($exameSemRef) {
+    public static function validarExameSemReferencia($exameSemRef) {
         if (empty($exameSemRef) || $exameSemRef == "") {
             $erro = '
             <script type="text/javascript">
@@ -141,7 +141,7 @@ class ValidacoesHelper {
         } 
     }
     
-    public function validarReferenciaExame($refExame) {
+    public static function validarReferenciaExame($refExame) {
         if (empty($refExame) || $refExame == "") {
             $erro = '
             <script type="text/javascript">
@@ -154,7 +154,7 @@ class ValidacoesHelper {
         } 
     }
     
-    public function validarValorReferenciaExame($valorRef) {
+    public static function validarValorReferenciaExame($valorRef) {
         if (empty($valorRef) || $valorRef == "") {
             $erro = '
             <script type="text/javascript">
