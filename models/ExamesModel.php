@@ -5,6 +5,37 @@ class ExamesModel extends Model {
     public function __construct() {
         parent::__construct();
     }
+    
+    public function editarResultadoExame($idResultadoExames) {
+        if (!empty($idResultadoExames) && is_array($idResultadoExames)) {
+            $ids = implode(',', $idResultadoExames);
+            $stmt = $this->db->prepare("SELECT res.id_resultado_exame AS id, ne.nome_exame AS nome, res.resultado AS resultado, "
+                  . "ne.medida AS medida FROM tb_resultado_exame AS res JOIN tb_nome_exame AS ne ON (ne.id_nome_exame = "
+                  . "res.fk_nome_exame) WHERE res.id_resultado_exame IN ($ids) ORDER BY res.id_resultado_exame ASC");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+    }
+    
+    public function salvarResultadoEditadoExame($resultadoExames) {
+        if (!empty($resultadoExames) && is_array($resultadoExames)) {
+            try {
+                $this->db->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+                $this->db->beginTransaction();
+                    foreach ($resultadoExames as $key => $value) {
+                        $stmt = $this->db->prepare("UPDATE tb_resultado_exame SET resultado = '$value' WHERE id_resultado_exame = $key");
+                        $stmt->execute();
+                    }
+                $this->db->commit();
+                return true;
+            } catch (PDOException $exc) {
+                $this->db->rollback();
+                printf($exc);
+                return false;
+            }
+        }
+    }
 
     public function listaGeralExames() {
         $stmt = $this->db->query("SELECT * FROM vw_lista_geral_exames");
@@ -21,6 +52,29 @@ class ExamesModel extends Model {
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }    
+    }
+    
+    public function listarExamesAdicionar($idExame, $idGrupoExame) {
+        $dados = array();
+        if ((isset($idExame) && !empty($idExame)) && (isset($idGrupoExame) && !empty($idGrupoExame))) {
+            $stmt = $this->db->prepare("SELECT nex.id_nome_exame AS id, nex.nome_exame AS nome, nex.fk_grupo_exame AS id_grupo "
+                  . "FROM tb_nome_exame nex JOIN tb_grupo_exame AS gex ON (gex.id_grupo_exame = nex.fk_grupo_exame) "
+                  . "WHERE NOT EXISTS (SELECT * FROM vw_litar_exames_adicionar eadc WHERE eadc.fk_nome_exame = nex.id_nome_exame "
+                  . "AND eadc.id_exame = ? AND eadc.id_grupo_exame = ?) AND gex.id_grupo_exame = ? ORDER BY nex.nome_exame");
+            $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmt->bindValue(2, $idGrupoExame, PDO::PARAM_INT);
+            $stmt->bindValue(3, $idGrupoExame, PDO::PARAM_INT);
+            $stmt->execute();
+            $dados['tipoexames'] = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+            
+            $stmtex = $this->db->prepare("SELECT exa.id_exame AS id_exa, exa.num_exame, DATE_FORMAT(exa.data_exame, '%d/%m/%Y') "
+                  . "AS dt_exame FROM tb_exame AS exa WHERE id_exame = ?");
+            $stmtex->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmtex->execute();
+            $dados['exame'] = $stmtex->fetchAll(PDO::FETCH_ASSOC);
+            
+            return $dados;
+        }
     }
 
     public function verDetalheExame($idExame) {
@@ -127,7 +181,23 @@ class ExamesModel extends Model {
             
         }   
         return $dados;
-    }   
+    }  
+    
+    public function contaExamesResultadoAberto() {
+        $dados = array();
+        $stmt = $this->db->prepare("SELECT distinct(SELECT EXTRACT(year FROM data_exame)) AS ano FROM tb_exame ORDER BY ano ASC");
+        $stmt->execute();
+        $dados['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($dados['data'] as $value) {
+            $stmt = $this->db->prepare("SELECT count(DISTINCT rexa.fk_exame) AS qtd, rexa.fk_exame AS idExame, "
+                  . "(SELECT EXTRACT(year FROM exa.data_exame)) AS data FROM tb_resultado_exame AS rexa JOIN tb_exame AS exa "
+                  . "ON (exa.id_exame = rexa.fk_exame) WHERE rexa.resultado = '' OR rexa.resultado IS NULL AND exa.data_exame "
+                  . "BETWEEN '".$value['ano']."-01-01' AND '".$value['ano']."-12-31'");
+            $stmt->execute();
+            $dados['exames'] = $stmt->fetch(PDO::FETCH_ASSOC);
+        } 
+        return $dados;
+    } 
     
     public function cadastrarNovoExame($exame) {
         if (isset($exame) && !empty($exame)) {
@@ -170,6 +240,40 @@ class ExamesModel extends Model {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function adcionarTipoDeExames($idExame, $idGrupo, $tipoDeExame) {
+        if ((isset($idExame) && !empty($idExame)) && (isset($tipoDeExame) && !empty($tipoDeExame)) && (isset($idGrupo) && !empty($idGrupo))) {
+            $fks = implode(',', $tipoDeExame);
+            $resp = "";
+            $stmt = $this->db->prepare("SELECT fk_nome_exame FROM tb_resultado_exame WHERE fk_nome_exame IN "
+                  . "($fks) AND fk_exame = ?");
+            $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                $resp = true;
+            }
+            if ($resp != true) {
+                try {
+                    $this->db->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+                    $this->db->beginTransaction();
+                    foreach ($tipoDeExame as $value) {
+                        $stmt = $this->db->prepare("INSERT INTO tb_resultado_exame (fk_exame, fk_nome_exame) VALUES (?, ?)");
+                        $stmt->bindValue(1, $idExame, PDO::PARAM_INT);
+                        $stmt->bindValue(2, $value, PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
+                    $this->db->commit();
+                    return true;
+                } catch (PDOException $exc) {
+                    $this->db->rollback();
+                    printf($exc);
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
+
+
     public function selecionarExames($idExame, $idExamesDetalhe) {
         if ((isset($idExame) && !empty($idExame)) && (isset($idExamesDetalhe) && !empty($idExamesDetalhe))) {
             

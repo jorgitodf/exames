@@ -88,6 +88,41 @@ class cadastroController extends Controller {
         $dados['idExame'] = $idExame;
         $this->loadTemplate('cadastroExameDetalhe', $dados);
     }
+    
+    public function adicionar_exame_detalhe() {
+        $dados = array();
+        if (isset($_POST['idExame']) && isset($_POST['idGrupoExame'])) {
+            $idExame = $_POST['idExame'];
+            $idGrupoExame = intval($_POST['idGrupoExame']);    
+            $dados['adcexames'] = $this->examesModel->listarExamesAdicionar($idExame, $idGrupoExame);
+            $this->loadTemplate('adicionarExameDetalhe', $dados);
+        } elseif (isset($_POST['idExame']) && isset($_POST['idGrupo'])) {
+            $status = TRUE;
+            $tipoDeExame = "";
+            $idExame = $_POST['idExame'];
+            $idGrupo = $_POST['idGrupo'];
+            if (!isset($_POST['exames'])) {
+                ValidacoesHelper::validarExameDetalhe($tipoDeExame);
+                $status = FALSE;
+                echo ValidacoesHelper::validarExameDetalhe($tipoDeExame);
+            }
+            if ($status == TRUE) {
+                $tipoDeExame = $_POST['exames'];
+                if ($this->examesModel->adcionarTipoDeExames($idExame, $idGrupo, $tipoDeExame) == true) {
+                   echo '
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#msgSucessoAddExames").html("Exames Selecionados Cadastrados com Sucesso");
+                            $("#msgSucessoAddExames").css("display","block");
+                        });
+                    </script> ';
+                }
+            }
+
+            
+            
+        }
+    }
 
     public function selecionar_exames() {
         if (isset($_POST['idExame']) && isset($_POST['idGrupo'])) {

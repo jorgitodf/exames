@@ -166,4 +166,19 @@ class ValidacoesHelper {
             return $erro;
         }  
     }
+    
+    public static function validarResultadoExame($string) {
+        foreach($string as $conteudo){
+            if(!strlen($conteudo)) {
+                $erro = '
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#resultadoError").html("Preencha todos os campos de Resultados!");
+                        $("#resultadoError").css("display","block");
+                    });
+                </script>';
+                return $erro;
+            }
+        }
+    }
 }

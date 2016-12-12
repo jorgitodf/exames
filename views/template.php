@@ -32,6 +32,12 @@
                             <li><a href="<?php echo BASE_URL; ?>/cadastro/cadastrartipoexame">Tipo de Exame</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#">Alterações<b class=" fa fa-angle-down"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="<?php echo BASE_URL; ?>/exame/alterar">Editar Exame</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </header>

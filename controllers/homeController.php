@@ -12,6 +12,7 @@ class homeController extends Controller {
     public function index() {
         $dados = array();
         $dados['contagem'] = $this->examesModel->contaExames();
+        $dados['contexaaberto'] = $this->examesModel->contaExamesResultadoAberto();
         $this->loadTemplate('homeView', $dados);
     }
 

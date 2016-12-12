@@ -69,12 +69,12 @@
         font-size: 3px;
     }
     .panel_exame_geral_detalhe {
-        margin-top: 8%;
+        margin-top: 6%;
         margin-left: 8%;
         width: 70%;
     }
     .panel_exame_geral {
-        margin-top: 8%;
+        margin-top: 6%;
         margin-left: auto;
     }
     #panel_head {
@@ -94,7 +94,7 @@
     }
     
     .div_nao_existe {
-        margin-top: 8%;
+        margin-top: 6%;
     }
     
     #table_exame_detalhado {
@@ -152,7 +152,7 @@
         margin-bottom: 20px;
     }
     .form_cadastro_exame {
-        margin-top: 8%;
+        margin-top: 6%;
     }
 
     #panel_form_cadastro_exame {
@@ -180,7 +180,7 @@
         float: left;
     }
     .div_view_referencia_exame {
-        margin-top: 8%;
+        margin-top: 6%;
     }
     #panel_view_referencia_exame {
         width: 40%;
@@ -592,6 +592,100 @@
         text-align: center;
         display: none;
     }
+    .div_recebe_num_exame_data_exame {
+        border: 1px solid #E8E8E8;
+        height: 30px;
+        width: 102%;
+        margin-left: -2%;
+        background-color: #E8E8E8;
+
+    }
+    #div_exibe_num_exame {
+        text-align: center;
+        width: 50%;
+        float: left;
+        padding: 3px;
+    }
+    #div_exibe_data_exame {
+        text-align: center;
+        width: 50%;
+        float: left;
+        padding: 3px;
+    }
+    .color_blue {
+        color: blue;
+        font-weight: bold;
+    }
+    .div_recebe_id_grupo {
+        border: 1px solid #E8E8E8;
+        width: 102%;
+        margin-left: -2%;
+        width: 15%;
+        border-bottom-color: white;
+        margin-top: 0;
+    }
+    #div_exibe_id_grupo {
+        text-align: center;
+        padding: 8px;
+        background-color: #E8E8E8;
+        
+    }
+    .div_container_adc_exame {
+        margin-top: 6%;
+        margin-left: 8%;
+        width: 70%;
+    }
+    .ocultaMsgs {
+        display: none;
+    }
+    
+    /*TABELA EDITAR EXAMES*/
+    #table_editar_exame {
+        width: 100%;
+        margin-left: auto;
+        margin-top: 1.5%;
+    }
+    #table_editar_exame > tbody > tr > td {
+        text-align: center;
+        padding: 1px;
+    }
+    #table_editar_exame > thead > tr > th {
+        text-align: center;
+        padding: 3px;
+        background-color: #E8E8E8;
+        color: black;
+        border: 0;
+    }
+    #table_editar_exame > thead > tr > td {
+        text-align: center;
+        padding: 3px;
+        background-color: #E8E8E8;
+        color: blue;
+        border: 0;
+    }
+    #resultado_exame {
+        text-align: center;
+        border: none;
+    }
+    .msgErroEditarExame {
+        color: red;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 0;
+        display: none;
+    }
+    .color_red {
+        color: red;
+    }
+    #msgAlteracaoExameSucesso {
+        width: 35%;
+        text-align: center;
+        font-weight: bold;
+        padding: 8px;
+        display: none;
+    }
+    
+
 }
 
 @media (min-width: 1440px) {
@@ -663,12 +757,12 @@
         font-size: 3px;
     }
     .panel_exame_geral_detalhe {
-        margin-top: 8%;
+        margin-top: 6%;
         margin-left: 8%;
         width: 70%;
     }
     .panel_exame_geral {
-        margin-top: 8%;
+        margin-top: 6%;
         margin-left: auto;
     }
     #panel_head {
@@ -688,7 +782,7 @@
     }
     
     .div_nao_existe {
-        margin-top: 8%;
+        margin-top: 6%;
     }
     
     #table_exame_detalhado {
@@ -746,7 +840,7 @@
         margin-bottom: 20px;
     }
     .form_cadastro_exame {
-        margin-top: 8%;
+        margin-top: 6%;
     }
 
     #panel_form_cadastro_exame {
@@ -774,7 +868,7 @@
         float: left;
     }
     .div_view_referencia_exame {
-        margin-top: 8%;
+        margin-top: 6%;
     }
     #panel_view_referencia_exame {
         width: 40%;

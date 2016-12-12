@@ -48,7 +48,49 @@ $(document).ready(function() {
         });	
     });	
     
+    $(function() {
+        $("#form_editar_resultado_exame").submit(function(e) {
+            $(".msgErroEditarExame").html("");
+            $(".msgErroEditarExame").css("display","none");
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: $(this).serialize(),
+                success: function(retorno) {
+                    beforeSend: $("#retorno").html(retorno);
+                    var sucesso = $("#msgAlteracaoExameSucesso").text();
+                    if (sucesso === 'Resultado do Exame Salvo com Sucesso!') {
+                        $("#btn_salva_edit_exame").attr('disabled', 'disabled');
+                    }
+                    return false;
+                }
+            });
+
+        });	
+    });
     
+    $(function() {
+        $("#form_adc_exames").submit(function(e) {
+            $(".msgError").html("");
+            $(".msgError").css("display","none");
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: $(this).serialize(),
+                success: function(retorno) {
+                    beforeSend: $("#retorno").html(retorno);
+                    var sucesso = $("#msgSucessoAddExames").text();
+                    if (sucesso === 'Exames Selecionados Cadastrados com Sucesso') {
+                        $("#btn_add_exames").attr('disabled', 'disabled');
+                    }
+                    return false;
+                }
+            });
+
+        });	
+    });
     
     $(function() {
         $("#form_grupo_1").submit(function(e) {
