@@ -21,7 +21,7 @@
             <?php isset($contexaaberto['exames']) ? $contexaaberto['exames'] : ""; ?>
             <ul class="list-group" id="list_group_home">
                 <?php foreach ($contexaaberto['exames'] as $linha): ?>
-                    <li class="list-group-item">Total Exames S/ Resultados em <?php echo $linha['data']; ?>: <a href="<?php echo BASE_URL; ?>/exame/listar_ano/<?php echo $linha['idExame']; ?>"><span class="badge" id="badge_geral"></span></a></li>
+                <li class="list-group-item">Total Exames S/ Resultados em <?php echo !empty($linha['data']) ? $linha['data'] : ""; ?>: <a href="<?php echo BASE_URL; ?>/exame/listar_ano/<?php echo !empty($linha['idExame']) ? $linha['idExame'] : ""; ?>"><span class="badge" id="badge_geral"><?php echo !empty($linha['qtd']) ? $linha['data'] : 0; ?></span></a></li>
                 <?php endforeach; ?>
             </ul>
         </aside>
